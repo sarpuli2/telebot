@@ -102,19 +102,6 @@ function addPopupScript() {
   document.body.appendChild(popupScript);
 }
 
-// Unity Instance Oluştur
-function initializeUnity() {
-  createUnityInstance(document.querySelector("#unity-canvas"), {
-    dataUrl: "Build/telegame.data",
-    frameworkUrl: "Build/telegame.framework.js",
-    codeUrl: "Build/telegame.wasm",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "Webtelegram",
-    productVersion: "1.0.2",
-  });
-}
-
 // Sayfa Yüklendiğinde Yapılacaklar
 window.addEventListener('load', () => {
   scaleCanvas();
