@@ -6,20 +6,6 @@ const adSource = document.getElementById('vastSource');
 const countdownSpan = document.createElement('span');
 adButton.appendChild(countdownSpan);
 
-// WebSocket bağlantısını başlat
-const socket = io("http://127.0.0.1:5000");  // Yerel bağlantı için, gerekirse değiştirilir
-
-// WebApp açıldığında sunucuya selam gönder
-window.Telegram.WebApp.onEvent("web_app_opened", () => {
-    console.log("WebApp açıldı, WebSocket bağlantısı başlatılıyor...");
-    socket.emit('webapp_opened', { msg: 'WebApp açıldı!' });
-    console.log("WebApp sunucuya mesaj gönderdi: WebApp açıldı!");
-});
-
-// Sunucudan gelen mesajları dinleyin ve konsola yazdırın
-socket.on('message', (data) => {
-    console.log("Bot'tan gelen mesaj:", data.msg);
-});
 // Reklam Videoları
 const videoUrls = [
   "./adsvideos/video1.mp4", "./adsvideos/video2.mp4", "./adsvideos/video3.mp4",
@@ -72,9 +58,6 @@ function onVideoEnd() {
         console.log("API Response:", data);  // Konsola gelen yanıtı yazdırın
         if (data.success) {
           console.log("Balance updated successfully.");
-
-          // WebSocket üzerinden bot'a mesaj gönder
-          socket.emit('video_watched', { user_id: telegramId, msg: "Videoyu izledi" });
         } else {
           alert(`Error updating balance: ${data.message}`);
         }
