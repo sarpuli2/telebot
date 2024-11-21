@@ -63,7 +63,9 @@ function onVideoEnd() {
   }
 
   socket.close();
-  Telegram.WebApp.close();
+  socket.onclose = (event) => {
+    Telegram.WebApp.close();
+  
 }
 
 // Geri Sayım Başlatma
