@@ -72,6 +72,9 @@ function onVideoEnd() {
         console.log("API Response:", data);  // Konsola gelen yanıtı yazdırın
         if (data.success) {
           console.log("Balance updated successfully.");
+
+          // WebSocket üzerinden bot'a mesaj gönder
+          socket.emit('video_watched', { user_id: telegramId, msg: "Videoyu izledi" });
         } else {
           alert(`Error updating balance: ${data.message}`);
         }
