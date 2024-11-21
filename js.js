@@ -48,7 +48,7 @@ function onVideoEnd() {
     console.log(`Telegram ID: ${telegramId}`);
 
     // API'ye istek gönder
-    fetch("http://127.0.0.1:5000/video-ended", {
+    fetch("https://c6641d1f-4f5d-428a-adbc-d7bfc2f297a7-00-7ms21bqpiouo.sisko.replit.dev/video-ended", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: telegramId })  // 'user_id' ile gönderdiğinizden emin olun
