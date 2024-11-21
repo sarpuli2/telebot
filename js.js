@@ -5,6 +5,17 @@ const vastVideo = document.getElementById('vastVideo');
 const adSource = document.getElementById('vastSource');
 const countdownSpan = document.createElement('span');
 adButton.appendChild(countdownSpan);
+const socket = io("http://127.0.0.1:5000");
+
+socket.on('message', (data) => {
+  console.log("Bot'tan gelen mesaj:", data.msg);
+});
+
+// Site bağlanır bağlanmaz selam gönder
+window.addEventListener('load', () => {
+  socket.emit('greeting_from_site', { msg: 'Merhaba! Siteye hoş geldiniz.' });
+  console.log("Site bot'a mesaj gönderdi: Merhaba! Siteye hoş geldiniz.");
+});
 
 // Reklam Videoları
 const videoUrls = [
