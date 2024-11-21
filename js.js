@@ -8,12 +8,7 @@ adButton.appendChild(countdownSpan);
 
 // Reklam Videoları
 const videoUrls = [
-  "./adsvideos/video1.mp4", "./adsvideos/video2.mp4", "./adsvideos/video3.mp4",
-  "./adsvideos/video4.mp4", "./adsvideos/video5.mp4", "./adsvideos/video6.mp4",
-  "./adsvideos/video7.mp4", "./adsvideos/video8.mp4", "./adsvideos/video9.mp4",
-  "./adsvideos/video10.mp4", "./adsvideos/video11.mp4", "./adsvideos/video12.mp4",
-  "./adsvideos/video13.mp4", "./adsvideos/video14.mp4", "./adsvideos/video16.mp4",
-  "./adsvideos/video17.mp4", "./adsvideos/video18.mp4"
+  "./adsvideos/testvideo.mp4"
 ];
 
 // Canvas Boyutlandırma
