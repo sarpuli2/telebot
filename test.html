@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us"> 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="6a97888e-site-verification" content="3c88bbae6ed4a87589347b4d807c12bf">
+  <title>Unity Web Player | Webtelegram</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #231F20;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #unity-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 9 / 16;
+      background: #231F20;
+      overflow: hidden;
+    }
+
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      background: #231F20;
+    }
+
+    #adButton {
+      position: absolute;
+      top: 17%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 270px;
+      height: 105px;
+      font-size: 20px;
+      color: #000000;
+      background-color: #ff0000;
+      /* İlk renk kırmızı */
+      border: none;
+      border-radius: 10px;
+      cursor: not-allowed;
+      /* İlk durumda tıklanamaz */
+      transition: background-color 0.3s, transform 0.2s;
+      z-index: 10;
+    }
+
+    #adButton.enabled {
+      background-color: #4dff00;
+      /* Aktif durumda yeşil */
+      cursor: pointer;
+    }
+
+    #adButton:hover.enabled {
+      background-color: #109442;
+      /* Aktif durumda hover rengi */
+    }
+
+    #vastVideo {
+      display: none;
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 75%;
+      background: #000;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      z-index: 15;
+      pointer-events: auto;
+      /* Tıklanabilir */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="unity-container">
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <button id="adButton" onclick="ShowAd()" disabled>Watch The Ad <br> (CLICK)</button>
+    <video id="vastVideo">
+      <source id="vastSource" src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script src="Build/telegame.loader.js"></script>
+ <script>
+    const container = document.getElementById('unity-container');
+    const adButton = document.getElementById('adButton');
+    const vastVideo = document.getElementById('vastVideo');
+
+    function scaleCanvas() {
+        const scaleX = window.innerWidth / container.offsetWidth;
+        const scaleY = window.innerHeight / container.offsetHeight;
+        const scale = Math.min(scaleX, scaleY);
+        container.style.transform = `scale(${scale})`;
+        container.style.transformOrigin = 'center';
+    }
+
+    window.addEventListener('resize', scaleCanvas);
+    window.addEventListener('load', () => {
+        scaleCanvas();
+
+        // 2 saniye sonra butonu etkinleştirme
+        setTimeout(() => {
+            adButton.disabled = false;
+            adButton.classList.add("enabled");
+        }, 2000);
+    });
+
+    let won = false; // Global "won" değeri
+
+    function ShowAd() {
+        if (adButton.disabled) return; // Tıklanamazsa işleme devam etme
+
+        console.log("Ad button clicked. Selecting a random video...");
+
+        const adSource = document.getElementById('vastSource');
+
+        // Videoların bağlantılarını burada tanımlayın
+        const videoUrls = [
+            "./adsvideos/video1.mp4",
+            "./adsvideos/video2.mp4",
+            "./adsvideos/video3.mp4",
+            "./adsvideos/video4.mp4",
+            "./adsvideos/video5.mp4",
+            "./adsvideos/video6.mp4",
+            "./adsvideos/video7.mp4",
+            "./adsvideos/video8.mp4",
+            "./adsvideos/video9.mp4",
+            "./adsvideos/video10.mp4",
+            "./adsvideos/video11.mp4",
+            "./adsvideos/video12.mp4",
+            "./adsvideos/video13.mp4",
+            "./adsvideos/video14.mp4",
+            "./adsvideos/video16.mp4",
+            "./adsvideos/video17.mp4",
+            "./adsvideos/video18.mp4"
+
+        ];
+
+        // Rastgele bir video seçiliyor
+        const randomIndex = Math.floor(Math.random() * videoUrls.length);
+        const randomVideoUrl = videoUrls[randomIndex];
+
+        console.log("Random video selected:", randomVideoUrl);
+
+        adSource.src = randomVideoUrl;
+        vastVideo.style.display = "block";
+        adButton.style.display = "none";
+
+        vastVideo.load();
+        vastVideo.play()
+            .then(() => console.log("Random video playback started:", randomVideoUrl))
+            .catch(error => console.error("Error starting video playback:", error));
+
+        // Video bittiğinde "won" değerini true yapma ve Telegram Web App'i kapatma
+        vastVideo.addEventListener('ended', () => {
+            won = true;
+            console.log("Video playback finished. Won is set to:", won);
+            
+            // Telegram Web App portalını kapat
+            Telegram.WebApp.close();
+        });
+    }
+
+    // Video konteynerine tıklanması durumunda popup çıkarma
+    vastVideo.addEventListener('click', () => {
+        console.log("Video container clicked. Showing popup ad...");
+        const popupScript = document.createElement('script');
+        popupScript.type = 'text/javascript';
+        popupScript.src = '//pl25045052.profitablecpmrate.com/e9/18/f8/e918f8320e3ef835ab8c3de219895982.js';
+        document.body.appendChild(popupScript);
+    });
+
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/telegame.data",
+        frameworkUrl: "Build/telegame.framework.js",
+        codeUrl: "Build/telegame.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Webtelegram",
+        productVersion: "1.0.2",
+    });
+</script>
+</body>
+
+</html>
