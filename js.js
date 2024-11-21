@@ -49,7 +49,7 @@ function ShowAd() {
   vastVideo.play();
 
   // Video bittiğinde işlem yap
-  vastVideo.addEventListener('ended', onVideoEnd, { once: true });
+  vastVideo.addEventListener('ended', onVideoEnd);
 }
 
 // Video Bittiğinde Yapılacaklar
@@ -78,10 +78,6 @@ function onVideoEnd() {
     console.error("Error retrieving Telegram ID:", error);
   }
 
-  vastVideo.style.display = "none";
-  adButton.style.display = "block";
-  enableAdButton();
-  
   // Web App'i kapat
   Telegram.WebApp.close();
 }
