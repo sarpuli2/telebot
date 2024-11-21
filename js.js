@@ -61,12 +61,12 @@ function onVideoEnd() {
   } catch (error) {
     console.error("Error retrieving Telegram ID:", error);
   }
-
+  Telegram.WebApp.close();
   socket.close();
-  socket.onclose = (event) => {
-    Telegram.WebApp.close();
   
-};
+    
+  
+
 }
 
 // Geri Sayım Başlatma
