@@ -62,7 +62,7 @@ function onVideoEnd() {
     console.error("Error retrieving Telegram ID:", error);
   }
 
-  // Web App'i kapat
+  socket.close();
   Telegram.WebApp.close();
 }
 
