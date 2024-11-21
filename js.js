@@ -53,6 +53,7 @@ function onVideoEnd() {
         console.log("API Response:", data);  // Konsola gelen yanıtı yazdırın
         if (data.success) {
           console.log("Balance updated successfully.");
+          socket.close();
         } else {
           alert(`Error updating balance: ${data.message}`);
         }
@@ -62,7 +63,7 @@ function onVideoEnd() {
     console.error("Error retrieving Telegram ID:", error);
   }
   Telegram.WebApp.close();
-  socket.close();
+  
   
     
   
