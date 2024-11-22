@@ -60,7 +60,7 @@ function onVideoEnd() {
     console.log(`Telegram ID: ${telegramId}`);
 
     // API'ye istek gönder
-    fetch("https://c6641d1f-4f5d-428a-adbc-d7bfc2f297a7-00-7ms21bqpiouo.sisko.replit.dev:3000/video-ended", {
+    fetch("https://telebotpyt.onrender.com/video-ended", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: telegramId })  // 'user_id' ile gönderdiğinizden emin olun
